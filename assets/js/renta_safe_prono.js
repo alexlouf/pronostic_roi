@@ -60,7 +60,5 @@ function simulation(initial_wallet, month, day_in_month, bankroll, success_rate,
         }
     }
     wallet = wallet - (abonnement * month);
-    //var benef = wallet - initial_wallet;
-    //console.log("Avec "+initial_wallet+"€ initial en "+month+" mois tu as fait un benef net de "+benef+"€");
     return wallet;
 }
