@@ -9,7 +9,7 @@ if (!empty($_POST) && $_POST["pswd"] == "alexandrelouf"){
     header('Location: tracking.php'); 
 }
 
-$tracks = $pdo->query("SELECT * FROM log_bet");
+$tracks = $pdo->query("SELECT * FROM log_bet ORDER BY id DESC");
 $track = $tracks->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
@@ -23,7 +23,7 @@ $track = $tracks->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php include('./inc/nav.php') ?>
     <div class="container align-items-center d-flex flex-column">
-        <h1>Calcul des mises</h1>
+        <h1>Historiques des paris</h1>
         <form method="POST" action="./tracking.php">
             <div class="form-group">
                 <label for="secu">Sécurité</label>
@@ -71,9 +71,13 @@ $track = $tracks->fetchAll(PDO::FETCH_ASSOC);
             <?php 
                 $spent = 0;
                 $win = 0;
+                $cote = 0;
+                $index = 0;
                 foreach($track as $onetrack) {
+                    $index +=1;
                     $spent += $onetrack["mise"];
                     $success = "Pass";
+                    $cote += $onetrack["cote"];
                     $ca = $onetrack['mise'] * $onetrack['cote'];
                     $ca = round($ca, 2);
                     if ($onetrack['success'] == 0) {
@@ -92,6 +96,8 @@ $track = $tracks->fetchAll(PDO::FETCH_ASSOC);
                         </tr>
                     <?php
                 }
+                echo $index;
+                $cote = round($cote/$index,2);
                 $ok = "Négatif";
                 if($spent < $win) {
                     $ok = "Positif";
@@ -103,7 +109,7 @@ $track = $tracks->fetchAll(PDO::FETCH_ASSOC);
                 <th>Total</th>
                 <th>X</th>
                 <th><?= $spent ?></th>
-                <th>X</th>
+                <th><?= $cote ?></th>
                 <th><?= $win ?></th>
                 <th><?= $ok ?></th>
                 </tr>

@@ -38,6 +38,10 @@
                 <input type="number" class="form-control" id="price" placeholder="30">
             </div>
             <div class="form-group">
+                <label for="mult">Multiplicateur à chaque défaite</label>
+                <input type="number" class="form-control" id="mult" placeholder="2">
+            </div>
+            <div class="form-group">
                 <label for="simu">Nombre de simulations (calcul de moyenne)</label>
                 <input type="number" class="form-control" id="simu" placeholder="100">
                 <small id="emailHelp" class="form-text text-muted">Attention un trops gros chiffre entraine un ralentissement du navigateur</small>
