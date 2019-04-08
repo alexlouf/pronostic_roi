@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="icon" type="image/png" href="./assets/img/icon.png" />
+    <?php include('./inc/head.php') ?>
     <title>Calcul ROI</title>
 </head>
 <body>
-    <nav class="nav">
-        <a class="nav-link" href="/pronostic/index.html">ROI</a>
-        <a class="nav-link" href="/pronostic/bankroll.html">Calcul bankroll</a>
-    </nav>
+    <?php include('./inc/nav.php') ?>
     <div class="container align-items-center d-flex flex-column">
         <h1>Estimation pronostics</h1>
         <form>
