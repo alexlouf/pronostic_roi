@@ -96,7 +96,6 @@ $track = $tracks->fetchAll(PDO::FETCH_ASSOC);
                         </tr>
                     <?php
                 }
-                echo $index;
                 $cote = round($cote/$index,2);
                 $ok = "Négatif";
                 if($spent < $win) {
