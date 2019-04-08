@@ -35,11 +35,11 @@ $track = $tracks->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div class="form-group">
                 <label for="mise">Mise</label>
-                <input type="number" class="form-control" id="mise" placeholder="8" name="mise">
+                <input type="number" class="form-control" id="mise" placeholder="8" name="mise" step="0.01">
             </div>
             <div class="form-group">
                 <label for="cote">Cote</label>
-                <input type="number" class="form-control" id="cote" placeholder="1.3" name="cote">
+                <input type="number" class="form-control" id="cote" placeholder="1.3" name="cote" step="0.01">
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="success" id="exampleRadios1" value="1" checked>
@@ -63,28 +63,51 @@ $track = $tracks->fetchAll(PDO::FETCH_ASSOC);
                 <th scope="col">Date</th>
                 <th scope="col">Mise</th>
                 <th scope="col">Cote</th>
+                <th scope="col">Chiffre d'affaire</th>
                 <th scope="col">Succès</th>
                 </tr>
             </thead>
             <tbody>
             <?php 
+                $spent = 0;
+                $win = 0;
                 foreach($track as $onetrack) {
+                    $spent += $onetrack["mise"];
                     $success = "Pass";
+                    $ca = $onetrack['mise'] * $onetrack['cote'];
+                    $ca = round($ca, 2);
                     if ($onetrack['success'] == 0) {
                         $success = "Fail";
+                        $ca = 0;
                     }
+                    $win += $ca;
                     ?>
                         <tr>
                         <th scope="row"><?= $onetrack['id'] ?></th>
                         <td><?= $onetrack['date'] ?></td>
                         <td><?= $onetrack['mise'] ?></td>
                         <td><?= $onetrack['cote'] ?></td>
+                        <td><?= $ca ?></td>
                         <td><?= $success ?></td>
                         </tr>
                     <?php
                 }
+                $ok = "Négatif";
+                if($spent < $win) {
+                    $ok = "Positif";
+                }
             ?>
             </tbody>
+            <tfoot>
+                <tr>
+                <th>Total</th>
+                <th>X</th>
+                <th><?= $spent ?></th>
+                <th>X</th>
+                <th><?= $win ?></th>
+                <th><?= $ok ?></th>
+                </tr>
+            </tfoot>
         </table>
 
     </div>    
